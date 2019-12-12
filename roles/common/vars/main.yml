@@ -1,0 +1,4 @@
+---
+common_packages:
+  - httpie
+  - python-pip

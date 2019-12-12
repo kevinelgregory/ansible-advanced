@@ -1,0 +1,17 @@
+---
+- name: Install required packages
+  yum:
+    name: "{{ load_balance_packages }}"
+    state: latest
+
+- name: Deploy HAProxy configuration
+  template:
+    src: haproxy.cfg.j2
+    dest: /etc/haproxy/haproxy.cfg
+    mode: 0644      
+
+- name: Enable and start HAProxy
+  service:
+    name: haproxy
+    enabled: true
+    state: restarted

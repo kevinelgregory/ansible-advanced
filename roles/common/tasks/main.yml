@@ -1,0 +1,18 @@
+---
+- name: Disable "requiretty" for sudo
+  replace:
+    path: /etc/sudoers
+    regexp: '^Defaults\s*requiretty'
+    replace: 'Defaults  !requiretty'
+    backup: yes
+
+- name: Enable required repositories
+  template:
+    src: ./open_three-tier-app.repo
+    dest: /etc/yum.repos.d/open_three-tier-app.repo
+    mode: 0644
+
+- name: Install common packages
+  package:
+    name: "{{ common_packages }}"
+    state: latest

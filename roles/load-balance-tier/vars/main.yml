@@ -1,0 +1,4 @@
+---
+load_balance_packages:
+  - haproxy
+  - httpie

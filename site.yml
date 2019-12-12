@@ -1,0 +1,30 @@
+---
+- name: Apply common configuration to all hosts
+  hosts: all
+  become: true
+  gather_facts: false
+  
+  roles:
+    - common
+
+- name: Deploy application tier config
+  hosts: apps
+  become: yes
+  gather_facts: false
+
+  roles:
+    - app-tier
+
+- name: Deploy load-balanced tier config
+  hosts: frontends
+  become: true
+
+  roles:
+    - load-balance-tier
+
+- name: Deploy database tier config
+  hosts: appdbs
+  become: true
+
+  roles:
+    - geerlingguy.postgresql
